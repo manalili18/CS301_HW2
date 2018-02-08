@@ -13,10 +13,17 @@ import java.util.Random;
 
 public class Face extends SurfaceView {
 
-    private final int NUM_SKIN = 0;
-    private final int NUM_EYE = 0;
-    private final int NUM_HAIR_COLOR = 0;
-    private final int NUM_HAIR_STYLE = 0;
+    private final static int OPAQUE = 0xFF000000;
+    private final static int MAX_COLOR = 0x00FFFFFF;
+    private final static int MAX_HAIR_STYLE = HAIR_STYLE.values().length;
+
+    // TODO: format citation
+    // http://www.javapractices.com/topic/TopicAction.do?Id=1
+    private enum HAIR_STYLE {
+        BALD,
+        AFRO,
+        MOHAWK
+    }
 
     private int skinColor, eyeColor, hairColor, hairStyle;
     public static Random random;
@@ -44,16 +51,19 @@ public class Face extends SurfaceView {
         // https://stackoverflow.com/questions/6202818/initializing-multiple-variables-to-the-same-value-in-java
         skinColor = eyeColor = hairColor = hairStyle = 0; // stack overflow
 
+
+
+
         random = new Random();
 
         randomize();
     }
 
     public void randomize() {
-        skinColor = random.nextInt(NUM_SKIN-1);
-        eyeColor = random.nextInt(NUM_EYE-1);
-        hairColor = random.nextInt(NUM_HAIR_COLOR-1);
-        hairStyle = random.nextInt(NUM_HAIR_STYLE-1);
+        skinColor = OPAQUE + random.nextInt(MAX_COLOR+1);
+        eyeColor = OPAQUE + random.nextInt(MAX_COLOR+1);
+        hairColor = OPAQUE + random.nextInt(MAX_COLOR+1);
+        hairStyle = random.nextInt(MAX_HAIR_STYLE);
     }
 
     public void onDraw(Canvas c) {
