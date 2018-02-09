@@ -51,16 +51,13 @@ public class Face extends SurfaceView {
         // https://stackoverflow.com/questions/6202818/initializing-multiple-variables-to-the-same-value-in-java
         skinColor = eyeColor = hairColor = hairStyle = 0; // stack overflow
 
-
-
-
         random = new Random();
 
         randomize();
     }
 
     public void randomize() {
-        skinColor = OPAQUE + random.nextInt(MAX_COLOR+1);
+        skinColor = OPAQUE + random.nextInt(MAX_COLOR+1); // TODO: consider putting bounds on this
         eyeColor = OPAQUE + random.nextInt(MAX_COLOR+1);
         hairColor = OPAQUE + random.nextInt(MAX_COLOR+1);
         hairStyle = random.nextInt(MAX_HAIR_STYLE);
