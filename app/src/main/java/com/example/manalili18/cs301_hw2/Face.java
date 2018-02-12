@@ -2,6 +2,8 @@ package com.example.manalili18.cs301_hw2;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -65,5 +67,8 @@ public class Face extends SurfaceView {
 
     public void onDraw(Canvas c) {
         //draw face
+        Paint temp = new Paint();
+        temp.setColor(Color.BLUE);
+        c.drawCircle(this.getWidth()/2,this.getHeight()/2,20,temp);
     }
 }
