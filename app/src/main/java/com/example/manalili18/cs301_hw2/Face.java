@@ -27,7 +27,7 @@ public class Face extends SurfaceView {
         MOHAWK
     }
 
-    private int skinColor, eyeColor, hairColor, hairStyle;
+    protected int skinColor, eyeColor, hairColor, hairStyle;
     private Paint skinPaint, eyePaint, hairPaint;
     public static Random random;
 
@@ -73,16 +73,112 @@ public class Face extends SurfaceView {
         eyePaint.setColor(eyeColor);
         hairPaint.setColor(hairColor);
 
+        invalidate();
+
+    }
+
+    public void setSkinColor(int colorVal, int rgb){
+        int red = Color.red(skinColor);
+        int green = Color.green(skinColor);
+        int blue = Color.blue(skinColor);
+
+        switch(rgb){
+            case 0: //red
+                red = colorVal;
+                break;
+            case 1: //green
+                green = colorVal;
+                break;
+            case 2: //blue
+                blue = colorVal;
+                break;
+
+        }
+
+        skinColor = Color.argb(0xFF,red,green,blue);
+        skinPaint.setColor(skinColor);
+
+        invalidate();
+    }
+
+    public void setEyeColor(int colorVal, int rgb){
+        int red = Color.red(eyeColor);
+        int green = Color.green(eyeColor);
+        int blue = Color.blue(eyeColor);
+
+        switch(rgb){
+            case 0: //red
+                red = colorVal;
+                break;
+            case 1: //green
+                green = colorVal;
+                break;
+            case 2: //blue
+                blue = colorVal;
+                break;
+
+        }
+
+        eyeColor = Color.argb(0xFF,red,green,blue);
+        eyePaint.setColor(eyeColor);
+
+        invalidate();
+    }
+
+    public void setHairColor(int colorVal, int rgb){
+        int red = Color.red(hairColor);
+        int green = Color.green(hairColor);
+        int blue = Color.blue(hairColor);
+
+        switch(rgb){
+            case 0: //red
+                red = colorVal;
+                break;
+            case 1: //green
+                green = colorVal;
+                break;
+            case 2: //blue
+                blue = colorVal;
+                break;
+
+        }
+
+        hairColor = Color.argb(0xFF,red,green,blue);
+        hairPaint.setColor(hairColor);
+
+        invalidate();
     }
 
     public void onDraw(Canvas c) {
         //draw face
-        Paint temp = new Paint();
-        temp.setColor(Color.BLUE);
-        c.drawCircle(this.getWidth() / 2,
-                this.getHeight() * 2 / 3,
-                (this.getWidth() > this.getHeight()) ? this.getHeight() * 2 / 3 : this.getWidth() * 2 / 3,
+        Paint white = new Paint();
+        white.setColor(Color.WHITE);
+
+        Paint black = new Paint();
+        black.setColor(Color.BLACK);
+
+        int xCtr = this.getWidth() / 2;
+        int yCtr = this.getHeight() * 3 / 5;
+        int eyeDist = 160;
+
+        //face
+        c.drawCircle(xCtr,
+                yCtr,
+                (this.getWidth() > this.getHeight()) ? this.getHeight() * 2 / 6 : this.getWidth() * 2 / 6,
                 skinPaint);
+
+        //eyes
+        //whites
+        c.drawCircle(xCtr-eyeDist,yCtr-80,80,white);
+        c.drawCircle(xCtr+eyeDist,yCtr-80,80,white);
+
+        //iris
+        c.drawCircle(xCtr-eyeDist,yCtr-80,50,eyePaint);
+        c.drawCircle(xCtr+eyeDist,yCtr-80,50,eyePaint);
+
+        //mouth
+        c.drawRect(xCtr-200,yCtr+190,xCtr+200,yCtr+200,black);
+
     }
 
 }
